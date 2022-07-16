@@ -3,13 +3,13 @@ getgenv().Enabled = true
 getgenv().EnabledReaper = true
 getgenv().EnabledBoomerang = true 
 local players = game:GetService("Players")
+local allplayers = players:GetPlayers()
 function killstreak(input, IsTyping) 
 	if IsTyping == true then return end 
 	if input.KeyCode == Enum.KeyCode.E then 
 		print("Pressed E")
 		while getgenv().Enabled == true do 
             if getgenv().Enabled == true then 
-                local allplayers = players:GetPlayers() 
                 task.wait()
                 for i, v in pairs(allplayers) do 
                     task.wait()
@@ -32,7 +32,6 @@ function reaper(input, isTyping)
         while getgenv().EnabledReaper == true do 
             if getgenv().EnabledReaper == true then 
                 task.wait()
-                allplayers = players:GetPlayers()
                 for i, v in pairs(allplayers) do 
                     task.wait()
                     if v:IsA("Player") then 
@@ -53,7 +52,6 @@ function boomerang(input, isTyping)
         while getgenv().EnabledBoomerang == true do 
             task.wait()
             if getgenv().EnabledBoomerang == true then 
-                allplayers = players:GetPlayers()
                 for i, v in pairs(allplayers) do 
                     task.wait()
                     local name = v.Name 
