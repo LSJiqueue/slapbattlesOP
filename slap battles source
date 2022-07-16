@@ -1,66 +1,144 @@
-local userinputservice = game:GetService("UserInputService")
-getgenv().Enabled = true 
-getgenv().EnabledReaper = true
-getgenv().EnabledBoomerang = true 
-local players = game:GetService("Players")
-local allplayers = players:GetPlayers()
-function killstreak(input, IsTyping) 
-	if IsTyping == true then return end 
-	if input.KeyCode == Enum.KeyCode.E then 
-		print("Pressed E")
-		while getgenv().Enabled == true do 
-            if getgenv().Enabled == true then 
-                task.wait()
-                for i, v in pairs(allplayers) do 
-                    task.wait()
-                    if v:IsA("Player") then 
-                        local name = v.Name 
-                        local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
-                        game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(unpack(args))
-                    end 
-                end 
-            end 
-        end 
-	end
-end
+-- Gui to Lua
+-- Version: 3.2
 
-userinputservice.InputBegan:Connect(killstreak)
-function reaper(input, isTyping)
-	if isTyping == true then return end 
-	if input.KeyCode == Enum.KeyCode.P then 
-		print("Pressed P")
-        while getgenv().EnabledReaper == true do 
-            if getgenv().EnabledReaper == true then 
-                task.wait()
-                for i, v in pairs(allplayers) do 
-                    task.wait()
-                    if v:IsA("Player") then 
-                        local name = v.Name 
-                        local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
-                        game:GetService("ReplicatedStorage"):WaitForChild("ReaperHit"):FireServer(unpack(args))
-                    end 
-                end 
-            end 
-        end 
-	end
-end
-userinputservice.InputBegan:Connect(reaper)
-function boomerang(input, isTyping)
-	if isTyping == true then return end 
-	if input.KeyCode == Enum.KeyCode.N then 
-		print("Pressed N")
-        while getgenv().EnabledBoomerang == true do 
-            task.wait()
-            if getgenv().EnabledBoomerang == true then 
-                for i, v in pairs(allplayers) do 
-                    task.wait()
-                    local name = v.Name 
-                    local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
-                    game:GetService("ReplicatedStorage"):WaitForChild("BoomerangH"):FireServer(unpack(args))
+-- Instances:
 
-                end 
-            end
-        end 
+local e = Instance.new("ScreenGui")
+local Killstreak = Instance.new("TextLabel")
+local reaper = Instance.new("TextLabel")
+local boomerang = Instance.new("TextLabel")
+
+--Properties:
+
+e.Name = "e"
+e.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+e.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Killstreak.Name = "Killstreak"
+Killstreak.Parent = e
+Killstreak.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+Killstreak.BorderSizePixel = 5
+Killstreak.Position = UDim2.new(0.817027628, 0, 0.526501775, 0)
+Killstreak.Size = UDim2.new(0.182972342, 0, 0.0565370768, 0)
+Killstreak.Font = Enum.Font.Gotham
+Killstreak.Text = "PRESS E TO ACTIVATE KILL STREAK AURA. MUST HAVE IT EQUIPPED"
+Killstreak.TextColor3 = Color3.fromRGB(0, 0, 0)
+Killstreak.TextScaled = true
+Killstreak.TextSize = 14.000
+Killstreak.TextWrapped = true
+
+reaper.Name = "reaper"
+reaper.Parent = e
+reaper.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+reaper.BorderSizePixel = 5
+reaper.Position = UDim2.new(0.817027628, 0, 0.620141327, 0)
+reaper.Size = UDim2.new(0.182972342, 0, 0.0618374571, 0)
+reaper.Font = Enum.Font.Gotham
+reaper.Text = "PRESS P TO ACTIVATE THE REAPER AURA. MUST HAVE IT EQUIPPED."
+reaper.TextColor3 = Color3.fromRGB(0, 0, 0)
+reaper.TextScaled = true
+reaper.TextSize = 14.000
+reaper.TextWrapped = true
+
+boomerang.Name = "boomerang"
+boomerang.Parent = e
+boomerang.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+boomerang.BorderSizePixel = 5
+boomerang.Position = UDim2.new(0.817027628, 0, 0.719081283, 0)
+boomerang.Size = UDim2.new(0.182972342, 0, 0.0600706711, 0)
+boomerang.Font = Enum.Font.Gotham
+boomerang.Text = "PRESS N TO EQUIP THE BOOMERANG AURA. MUST HAVE IT EQUIPPED. PRESS THE Z KEY TO CLOSE ALL UI"
+boomerang.TextColor3 = Color3.fromRGB(0, 0, 0)
+boomerang.TextScaled = true
+boomerang.TextSize = 14.000
+boomerang.TextWrapped = true
+
+-- Scripts:
+
+local function CGCQ_fake_script() -- e.Userinputservice 
+	local script = Instance.new('LocalScript', e)
+
+	local userinputservice = game:GetService("UserInputService")
+	getgenv().Enabled = true 
+	getgenv().EnabledReaper = true
+	getgenv().EnabledBoomerang = true 
+	local players = game:GetService("Players")
+	function killstreak(input, IsTyping) 
+		if IsTyping == true then return end 
+		if input.KeyCode == Enum.KeyCode.E then 
+			print("Pressed E")
+			while getgenv().Enabled == true do 
+				if getgenv().Enabled == true then 
+					task.wait()
+					local allplayers = players:GetPlayers() 
+					for i, v in pairs(allplayers) do 
+						task.wait()
+						if v:IsA("Player") then 
+							local name = v.Name 
+							local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+							game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(unpack(args))
+						end 
+					end 
+				end 
+			end 
+		end
 	end
+	
+	userinputservice.InputBegan:Connect(killstreak)
+	function reaper(input, isTyping)
+		if isTyping == true then return end 
+		if input.KeyCode == Enum.KeyCode.P then 
+			print("Pressed P")
+			while getgenv().EnabledReaper == true do 
+				if getgenv().EnabledReaper == true then 
+					task.wait()
+					local all = players:GetPlayers() 
+					for i, v in pairs(all) do 
+						task.wait()
+						if v:IsA("Player") then 
+							local name = v.Name 
+							local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+							game:GetService("ReplicatedStorage"):WaitForChild("ReaperHit"):FireServer(unpack(args))
+						end 
+					end 
+				end 
+			end 
+		end
+	end
+	userinputservice.InputBegan:Connect(reaper)
+	function boomerang(input, isTyping)
+		if isTyping == true then return end 
+		if input.KeyCode == Enum.KeyCode.N then 
+			print("Pressed N")
+			while getgenv().EnabledBoomerang == true do 
+				task.wait()
+				if getgenv().EnabledBoomerang == true then 
+					local a = players:GetPlayers()
+					for i, v in pairs(a) do 
+						task.wait()
+						local name = v.Name 
+						local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+						game:GetService("ReplicatedStorage"):WaitForChild("BoomerangH"):FireServer(unpack(args))
+	
+					end 
+				end
+			end 
+		end
+	end
+	userinputservice.InputBegan:Connect(boomerang)
 end
-userinputservice.InputBegan:Connect(boomerang)
+coroutine.wrap(CGCQ_fake_script)()
+local function RCVQROE_fake_script() -- e.toggle 
+	local script = Instance.new('LocalScript', e)
+
+	local uis = game:GetService("UserInputService")
+	uis.InputBegan:Connect(function(i, z)
+		if z == true then return end 
+		if i.KeyCode == Enum.KeyCode.Z then 
+			script.Parent.Killstreak.Visible = not script.Parent.Killstreak.Visible
+			script.Parent.reaper.Visible = not script.Parent.reaper.Visible 
+			script.Parent.boomerang.Visible = not script.Parent.boomerang.Visible
+		end
+	end)
+end
+coroutine.wrap(RCVQROE_fake_script)()
