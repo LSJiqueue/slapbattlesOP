@@ -1,7 +1,12 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
 local e = Instance.new("ScreenGui")
 local Killstreak = Instance.new("TextLabel")
 local reaper = Instance.new("TextLabel")
-local reaper_2 = Instance.new("TextLabel")
+local boomerang = Instance.new("TextLabel")
 
 --Properties:
 
@@ -13,7 +18,7 @@ Killstreak.Name = "Killstreak"
 Killstreak.Parent = e
 Killstreak.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
 Killstreak.BorderSizePixel = 5
-Killstreak.Position = UDim2.new(0, 0, 0.332155466, 0)
+Killstreak.Position = UDim2.new(0.817027628, 0, 0.526501775, 0)
 Killstreak.Size = UDim2.new(0.182972342, 0, 0.0565370768, 0)
 Killstreak.Font = Enum.Font.Gotham
 Killstreak.Text = "PRESS E TO ACTIVATE KILL STREAK AURA. MUST HAVE IT EQUIPPED"
@@ -26,7 +31,7 @@ reaper.Name = "reaper"
 reaper.Parent = e
 reaper.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
 reaper.BorderSizePixel = 5
-reaper.Position = UDim2.new(0, 0, 0.425795048, 0)
+reaper.Position = UDim2.new(0.817027628, 0, 0.620141327, 0)
 reaper.Size = UDim2.new(0.182972342, 0, 0.0618374571, 0)
 reaper.Font = Enum.Font.Gotham
 reaper.Text = "PRESS P TO ACTIVATE THE REAPER AURA. MUST HAVE IT EQUIPPED."
@@ -35,22 +40,22 @@ reaper.TextScaled = true
 reaper.TextSize = 14.000
 reaper.TextWrapped = true
 
-reaper_2.Name = "reaper"
-reaper_2.Parent = e
-reaper_2.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
-reaper_2.BorderSizePixel = 5
-reaper_2.Position = UDim2.new(0, 0, 0.524734974, 0)
-reaper_2.Size = UDim2.new(0.182972342, 0, 0.0600706711, 0)
-reaper_2.Font = Enum.Font.Gotham
-reaper_2.Text = "PRESS N TO EQUIP THE BOOMERANG AURA. MUST HAVE IT EQUIPPED"
-reaper_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-reaper_2.TextScaled = true
-reaper_2.TextSize = 14.000
-reaper_2.TextWrapped = true
+boomerang.Name = "boomerang"
+boomerang.Parent = e
+boomerang.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+boomerang.BorderSizePixel = 5
+boomerang.Position = UDim2.new(0.817027628, 0, 0.719081283, 0)
+boomerang.Size = UDim2.new(0.182972342, 0, 0.0600706711, 0)
+boomerang.Font = Enum.Font.Gotham
+boomerang.Text = "PRESS N TO EQUIP THE BOOMERANG AURA. MUST HAVE IT EQUIPPED. PRESS THE Z KEY TO CLOSE ALL UI"
+boomerang.TextColor3 = Color3.fromRGB(0, 0, 0)
+boomerang.TextScaled = true
+boomerang.TextSize = 14.000
+boomerang.TextWrapped = true
 
 -- Scripts:
 
-local function WLEV_fake_script() -- e.Userinputservice 
+local function MQVPC_fake_script() -- e.Userinputservice 
 	local script = Instance.new('LocalScript', e)
 
 	local userinputservice = game:GetService("UserInputService")
@@ -119,4 +124,18 @@ local function WLEV_fake_script() -- e.Userinputservice
 	end
 	userinputservice.InputBegan:Connect(boomerang)
 end
-coroutine.wrap(WLEV_fake_script)()
+coroutine.wrap(MQVPC_fake_script)()
+local function SJDK_fake_script() -- e.toggle 
+	local script = Instance.new('LocalScript', e)
+
+	local uis = game:GetService("UserInputService")
+	uis.InputBegan:Connect(function(i, z)
+		if z == true then return end 
+		if i.KeyCode == Enum.KeyCode.Z then 
+			script.Parent.Killstreak.Visible = not script.Parent.Killstreak.Visible
+			script.Parent.reaper.Visible = not script.Parent.reaper.Visible 
+			script.Parent.boomerang.Visible = not script.Parent.boomerang.Visible
+		end
+	end)
+end
+coroutine.wrap(SJDK_fake_script)()
