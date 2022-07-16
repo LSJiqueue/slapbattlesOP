@@ -9,8 +9,8 @@ function killstreak(input, IsTyping)
 		print("Pressed E")
 		while getgenv().Enabled == true do 
             if getgenv().Enabled == true then 
+                local allplayers = players:GetPlayers() 
                 task.wait()
-                local allplayers = players:GetPlayers() -- all the players in the server
                 for i, v in pairs(allplayers) do 
                     task.wait()
                     if v:IsA("Player") then 
@@ -23,6 +23,7 @@ function killstreak(input, IsTyping)
         end 
 	end
 end
+
 userinputservice.InputBegan:Connect(killstreak)
 function reaper(input, isTyping)
 	if isTyping == true then return end 
@@ -31,7 +32,7 @@ function reaper(input, isTyping)
         while getgenv().EnabledReaper == true do 
             if getgenv().EnabledReaper == true then 
                 task.wait()
-                local allplayers = players:GetPlayers() -- all the players in the server
+                allplayers = players:GetPlayers()
                 for i, v in pairs(allplayers) do 
                     task.wait()
                     if v:IsA("Player") then 
@@ -52,7 +53,7 @@ function boomerang(input, isTyping)
         while getgenv().EnabledBoomerang == true do 
             task.wait()
             if getgenv().EnabledBoomerang == true then 
-                local allplayers = players:GetPlayers() -- all the players in the server
+                allplayers = players:GetPlayers()
                 for i, v in pairs(allplayers) do 
                     task.wait()
                     local name = v.Name 
