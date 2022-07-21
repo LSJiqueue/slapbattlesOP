@@ -83,7 +83,7 @@ bullhand.TextWrapped = true
 
 -- Scripts:
 
-local function URTAJ_fake_script() -- e.Userinputservice 
+local function RSCHG_fake_script() -- e.Userinputservice 
 	local script = Instance.new('LocalScript', e)
 
 	local userinputservice = game:GetService("UserInputService")
@@ -184,12 +184,12 @@ local function URTAJ_fake_script() -- e.Userinputservice
 			while getgenv().EnabledBull == true do 
 				task.wait() 
 				if getgenv().EnabledBull == true then 
-					local plrs_staymad = players:GetPlayers() 
-					for i, v in pairs(plrs_staymad) do
+					local plrs = players:GetPlayers() 
+					for i, v in pairs(plrs) do
 						task.wait() 
 						local name = v.Name 
-						local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
-						game:GetService("ReplicatedStorage"):WaitForchild("BullHit"):FireServer(unpack(args))
+						local args = {[1] = players[v.Name].Character:FindFirstChild("Left Leg")}
+						game:GetService("ReplicatedStorage").BullHit:FireServer(unpack(args))
 					end 
 				end 
 			end 
@@ -197,8 +197,8 @@ local function URTAJ_fake_script() -- e.Userinputservice
 	end
 	userinputservice.InputBegan:Connect(bullhand)
 end
-coroutine.wrap(URTAJ_fake_script)()
-local function FICJ_fake_script() -- e.toggle 
+coroutine.wrap(RSCHG_fake_script)()
+local function HDBWCVS_fake_script() -- e.toggle 
 	local script = Instance.new('LocalScript', e)
 
 	local uis = game:GetService("UserInputService")
@@ -214,4 +214,4 @@ local function FICJ_fake_script() -- e.toggle
 		end
 	end)
 end
-coroutine.wrap(FICJ_fake_script)() 
+coroutine.wrap(HDBWCVS_fake_script)()
