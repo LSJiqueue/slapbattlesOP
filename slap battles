@@ -1,0 +1,217 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local e = Instance.new("ScreenGui")
+local Killstreak = Instance.new("TextLabel")
+local reaper = Instance.new("TextLabel")
+local boomerang = Instance.new("TextLabel")
+local extendedhand = Instance.new("TextLabel")
+local bullhand = Instance.new("TextLabel")
+
+--Properties:
+
+e.Name = "e"
+e.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+e.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Killstreak.Name = "Killstreak"
+Killstreak.Parent = e
+Killstreak.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+Killstreak.BorderSizePixel = 5
+Killstreak.Position = UDim2.new(0.817027628, 0, 0.526501775, 0)
+Killstreak.Size = UDim2.new(0.182972342, 0, 0.0565370768, 0)
+Killstreak.Font = Enum.Font.Gotham
+Killstreak.Text = "PRESS E TO ACTIVATE KILL STREAK AURA. MUST HAVE IT EQUIPPED"
+Killstreak.TextColor3 = Color3.fromRGB(0, 0, 0)
+Killstreak.TextScaled = true
+Killstreak.TextSize = 14.000
+Killstreak.TextWrapped = true
+
+reaper.Name = "reaper"
+reaper.Parent = e
+reaper.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+reaper.BorderSizePixel = 5
+reaper.Position = UDim2.new(0.817027628, 0, 0.620141327, 0)
+reaper.Size = UDim2.new(0.182972342, 0, 0.0618374571, 0)
+reaper.Font = Enum.Font.Gotham
+reaper.Text = "PRESS P TO ACTIVATE THE REAPER AURA. MUST HAVE IT EQUIPPED."
+reaper.TextColor3 = Color3.fromRGB(0, 0, 0)
+reaper.TextScaled = true
+reaper.TextSize = 14.000
+reaper.TextWrapped = true
+
+boomerang.Name = "boomerang"
+boomerang.Parent = e
+boomerang.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+boomerang.BorderSizePixel = 5
+boomerang.Position = UDim2.new(0.817027628, 0, 0.719081283, 0)
+boomerang.Size = UDim2.new(0.182972342, 0, 0.0600706711, 0)
+boomerang.Font = Enum.Font.Gotham
+boomerang.Text = "PRESS N FOR THE BOOMERANG AURA"
+boomerang.TextColor3 = Color3.fromRGB(0, 0, 0)
+boomerang.TextScaled = true
+boomerang.TextSize = 14.000
+boomerang.TextWrapped = true
+
+extendedhand.Name = "extended hand"
+extendedhand.Parent = e
+extendedhand.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+extendedhand.BorderSizePixel = 5
+extendedhand.Position = UDim2.new(0.817027628, 0, 0.810954034, 0)
+extendedhand.Size = UDim2.new(0.182972342, 0, 0.0565370768, 0)
+extendedhand.Font = Enum.Font.Gotham
+extendedhand.Text = "Press L to activate extended hand aura"
+extendedhand.TextColor3 = Color3.fromRGB(0, 0, 0)
+extendedhand.TextScaled = true
+extendedhand.TextSize = 14.000
+extendedhand.TextWrapped = true
+
+bullhand.Name = "bullhand"
+bullhand.Parent = e
+bullhand.BackgroundColor3 = Color3.fromRGB(25, 144, 255)
+bullhand.BorderSizePixel = 5
+bullhand.Position = UDim2.new(0.817027628, 0, 0.41768378, 0)
+bullhand.Size = UDim2.new(0.182972342, 0, 0.0565370768, 0)
+bullhand.Font = Enum.Font.Gotham
+bullhand.Text = "Press B To Activate Bull Hand. PRESS Z TO CLOSE ALL GUI"
+bullhand.TextColor3 = Color3.fromRGB(0, 0, 0)
+bullhand.TextScaled = true
+bullhand.TextSize = 14.000
+bullhand.TextWrapped = true
+
+-- Scripts:
+
+local function URTAJ_fake_script() -- e.Userinputservice 
+	local script = Instance.new('LocalScript', e)
+
+	local userinputservice = game:GetService("UserInputService")
+	getgenv().Enabled = true 
+	getgenv().EnabledReaper = true
+	getgenv().EnabledBoomerang = true 
+	getgenv().EnabledExtended = true 
+	getgenv().EnabledBull = true 
+	local players = game:GetService("Players")
+	function killstreak(input, IsTyping) 
+		if IsTyping == true then return end 
+		if input.KeyCode == Enum.KeyCode.E then 
+			print("Pressed E")
+			while getgenv().Enabled == true do 
+				if getgenv().Enabled == true then 
+					task.wait()
+					local allplayers = players:GetPlayers() 
+					for i, v in pairs(allplayers) do 
+						task.wait()
+						if v:IsA("Player") then 
+							local name = v.Name 
+							local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+							game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(unpack(args))
+						end 
+					end 
+				end 
+			end 
+		end
+	end
+	
+	userinputservice.InputBegan:Connect(killstreak)
+	function reaper(input, isTyping)
+		if isTyping == true then return end 
+		if input.KeyCode == Enum.KeyCode.P then 
+			print("Pressed P")
+			while getgenv().EnabledReaper == true do 
+				if getgenv().EnabledReaper == true then 
+					task.wait()
+					local all = players:GetPlayers() 
+					for i, v in pairs(all) do 
+						task.wait()
+						if v:IsA("Player") then 
+							local name = v.Name 
+							local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+							game:GetService("ReplicatedStorage"):WaitForChild("ReaperHit"):FireServer(unpack(args))
+						end 
+					end 
+				end 
+			end 
+		end
+	end
+	userinputservice.InputBegan:Connect(reaper)
+	function boomerang(input, isTyping)
+		if isTyping == true then return end 
+		if input.KeyCode == Enum.KeyCode.N then 
+			print("Pressed N")
+			while getgenv().EnabledBoomerang == true do 
+				task.wait()
+				if getgenv().EnabledBoomerang == true then 
+					local a = players:GetPlayers()
+					for i, v in pairs(a) do 
+						task.wait()
+						local name = v.Name 
+						local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+						game:GetService("ReplicatedStorage"):WaitForChild("BoomerangH"):FireServer(unpack(args))
+	
+					end 
+				end
+			end 
+		end
+	end
+	userinputservice.InputBegan:Connect(boomerang)
+	
+	function extendedhand(input, istyping)
+		if istyping == true then return end 
+		if input.KeyCode == Enum.KeyCode.L then
+			print("Pressed L")
+			while getgenv().EnabledExtended == true do 
+				task.wait() 
+				if getgenv().EnabledExtended == true then 
+					local zeeplayers = players:GetPlayers() 
+					for i, v in pairs(zeeplayers) do
+						task.wait() 
+						local name = v.Name 
+						local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+						game:GetService("ReplicatedStorage"):WaitForChild("b"):FireServer(unpack(args))
+					end 
+				end 
+			end 
+		end 
+	
+	end 
+	userinputservice.InputBegan:Connect(extendedhand)
+	function bullhand(input, typing)
+		if typing == true then return end
+		if input.KeyCode == Enum.KeyCode.B then 
+			print("Pressed B")
+			while getgenv().EnabledBull == true do 
+				task.wait() 
+				if getgenv().EnabledBull == true then 
+					local plrs_staymad = players:GetPlayers() 
+					for i, v in pairs(plrs_staymad) do
+						task.wait() 
+						local name = v.Name 
+						local args = {[1] = players[v.Name].Character:FindFirstChild("Right Arm")}
+						game:GetService("ReplicatedStorage"):WaitForchild("BullHit"):FireServer(unpack(args))
+					end 
+				end 
+			end 
+		end 
+	end
+	userinputservice.InputBegan:Connect(bullhand)
+end
+coroutine.wrap(URTAJ_fake_script)()
+local function FICJ_fake_script() -- e.toggle 
+	local script = Instance.new('LocalScript', e)
+
+	local uis = game:GetService("UserInputService")
+	uis.InputBegan:Connect(function(i, z)
+		if z == true then return end 
+		if i.KeyCode == Enum.KeyCode.Z then 
+			print("Pressed Z")
+			script.Parent.Killstreak.Visible = not script.Parent.Killstreak.Visible
+			script.Parent.reaper.Visible = not script.Parent.reaper.Visible 
+			script.Parent.boomerang.Visible = not script.Parent.boomerang.Visible
+			script.Parent["extended hand"].Visible = not script.Parent["extended hand"].Visible
+			script.Parent.bullhand.Visible = not script.Parent.bullhand.Visible 
+		end
+	end)
+end
+coroutine.wrap(FICJ_fake_script)() 
